@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/mdui/css/mdui.min.css">
+    <script src="/mdui/js/mdui.min.js"></script>
+  <title>鼎星Reborn 判定员工具</title>
+  
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+    .mdui-drawer-body {
+      padding-top: 20px;
+    }
+    .mdui-card .mdui-card-content {
+      padding-bottom: 20px;
+    }
+    .panel {
+      display: none;
+    }
+    .panel.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="mdui-theme-primary-blue mdui-theme-accent-teal">
+  <div class="container">
+
+    <!-- 侧边栏 -->
+    <div class="mdui-drawer mdui-drawer-close" id="drawer">
+      <div class="mdui-list">
+        <a href="javascript:void(0)" class="mdui-list-item mdui-ripple" id="farmPanelBtn">农耕文明</a>
+        <a href="javascript:void(0)" class="mdui-list-item mdui-ripple" id="oceanPanelBtn">海洋文明</a>
+        <a href="javascript:void(0)" class="mdui-list-item mdui-ripple" id="nomadicPanelBtn">游牧文明</a>
+      </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <main class="mdui-drawer-body">
+      <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll">
+        <div class="mdui-toolbar mdui-color-theme">
+          <span class="mdui-typo-title">鼎星Reborn 判定员工具</span>
+          <a href="javascript:void(0)" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: '#drawer'}">
+            <i class="mdui-icon material-icons">menu</i>
+          </a>
+        </div>
+      </div>
+
+      <!-- 面板切换 -->
+      <div class="panel active" id="farmPanel">
+        <div class="mdui-card">
+          <div class="mdui-card-content">
+            <h3>农耕文明</h3>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">文明名称</label>
+              <input class="mdui-textfield-input" id="farmName" type="text" placeholder="请输入文明名称" />
+            </div>
+            <!-- 参数输入 -->
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">生产力</label>
+              <input class="mdui-textfield-input" id="farmProduction" type="number" value="10" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">政治实力</label>
+              <input class="mdui-textfield-input" id="farmPolitical" type="number" value="15" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">军事实力</label>
+              <input class="mdui-textfield-input" id="farmMilitary" type="number" value="15" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">幸福度</label>
+              <input class="mdui-textfield-input" id="farmHappiness" type="number" value="60" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">环境度</label>
+              <input class="mdui-textfield-input" id="farmEnvironment" type="number" value="80" />
+            </div>
+            <div class="mdui-button mdui-color-theme" id="calculateFarmBtn">计算数值</div>
+          </div>
+        </div>
+        <div id="farmResult"></div>
+      </div>
+
+      <div class="panel" id="oceanPanel">
+        <div class="mdui-card">
+          <div class="mdui-card-content">
+            <h3>海洋文明</h3>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">文明名称</label>
+              <input class="mdui-textfield-input" id="oceanName" type="text" placeholder="请输入文明名称" />
+            </div>
+            <!-- 参数输入 -->
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">生产力</label>
+              <input class="mdui-textfield-input" id="oceanProduction" type="number" value="5" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">政治实力</label>
+              <input class="mdui-textfield-input" id="oceanPolitical" type="number" value="15" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">军事实力</label>
+              <input class="mdui-textfield-input" id="oceanMilitary" type="number" value="15" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">幸福度</label>
+              <input class="mdui-textfield-input" id="oceanHappiness" type="number" value="55" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">环境度</label>
+              <input class="mdui-textfield-input" id="oceanEnvironment" type="number" value="100" />
+            </div>
+            <div class="mdui-button mdui-color-theme" id="calculateOceanBtn">计算数值</div>
+          </div>
+        </div>
+        <div id="oceanResult"></div>
+      </div>
+
+      <div class="panel" id="nomadicPanel">
+        <div class="mdui-card">
+          <div class="mdui-card-content">
+            <h3>游牧文明</h3>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">文明名称</label>
+              <input class="mdui-textfield-input" id="nomadicName" type="text" placeholder="请输入文明名称" />
+            </div>
+            <!-- 参数输入 -->
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">生产力</label>
+              <input class="mdui-textfield-input" id="nomadicProduction" type="number" value="5" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">政治实力</label>
+              <input class="mdui-textfield-input" id="nomadicPolitical" type="number" value="10" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">军事实力</label>
+              <input class="mdui-textfield-input" id="nomadicMilitary" type="number" value="25" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">幸福度</label>
+              <input class="mdui-textfield-input" id="nomadicHappiness" type="number" value="55" />
+            </div>
+            <div class="mdui-textfield">
+              <label class="mdui-textfield-label">环境度</label>
+              <input class="mdui-textfield-input" id="nomadicEnvironment" type="number" value="70" />
+            </div>
+            <div class="mdui-button mdui-color-theme" id="calculateNomadicBtn">计算数值</div>
+          </div>
+        </div>
+        <div id="nomadicResult"></div>
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    // 获取所有按钮和面板
+    const farmPanelBtn = document.getElementById('farmPanelBtn');
+    const oceanPanelBtn = document.getElementById('oceanPanelBtn');
+    const nomadicPanelBtn = document.getElementById('nomadicPanelBtn');
+    
+    const farmPanel = document.getElementById('farmPanel');
+    const oceanPanel = document.getElementById('oceanPanel');
+    const nomadicPanel = document.getElementById('nomadicPanel');
+    
+    const calculateFarmBtn = document.getElementById('calculateFarmBtn');
+    const calculateOceanBtn = document.getElementById('calculateOceanBtn');
+    const calculateNomadicBtn = document.getElementById('calculateNomadicBtn');
+    
+    const farmResult = document.getElementById('farmResult');
+    const oceanResult = document.getElementById('oceanResult');
+    const nomadicResult = document.getElementById('nomadicResult');
+    
+    // 侧边栏点击切换面板
+    farmPanelBtn.addEventListener('click', function() {
+      showPanel(farmPanel);
+    });
+
+    oceanPanelBtn.addEventListener('click', function() {
+      showPanel(oceanPanel);
+    });
+
+    nomadicPanelBtn.addEventListener('click', function() {
+      showPanel(nomadicPanel);
+    });
+
+    function showPanel(panel) {
+      farmPanel.classList.remove('active');
+      oceanPanel.classList.remove('active');
+      nomadicPanel.classList.remove('active');
+      panel.classList.add('active');
+    }
+
+    // 计算函数：农耕文明
+    calculateFarmBtn.addEventListener('click', function() {
+      const params = {
+        production: parseFloat(document.getElementById('farmProduction').value),
+        political: parseFloat(document.getElementById('farmPolitical').value),
+        military: parseFloat(document.getElementById('farmMilitary').value),
+        happiness: parseFloat(document.getElementById('farmHappiness').value),
+        environment: parseFloat(document.getElementById('farmEnvironment').value),
+      };
+
+      let result = `<strong>${document.getElementById('farmName').value || '农耕文明'} 计算结果：</strong><br>`;
+      result += `生产力变化: ${(params.production * 0.2 + params.environment * 0.1 - params.political * 0.05).toFixed(2)}<br>`;
+      result += `政治实力变化: ${(params.political * 0.25 + params.military * 0.15 - params.happiness * 0.1).toFixed(2)}<br>`;
+      result += `军事实力变化: ${(params.military * 0.3 + params.production * 0.1).toFixed(2)}<br>`;
+      result += `幸福度变化: ${(params.happiness * 0.3 + params.environment * 0.1 - params.military * 0.05).toFixed(2)}<br>`;
+
+      farmResult.innerHTML = result;
+    });
+
+    // 计算函数：海洋文明
+    calculateOceanBtn.addEventListener('click', function() {
+      const params = {
+        production: parseFloat(document.getElementById('oceanProduction').value),
+        political: parseFloat(document.getElementById('oceanPolitical').value),
+        military: parseFloat(document.getElementById('oceanMilitary').value),
+        happiness: parseFloat(document.getElementById('oceanHappiness').value),
+        environment: parseFloat(document.getElementById('oceanEnvironment').value),
+      };
+
+      let result = `<strong>${document.getElementById('oceanName').value || '海洋文明'} 计算结果：</strong><br>`;
+      result += `生产力变化: ${(params.production * 0.2 + params.environment * 0.1 - params.political * 0.05).toFixed(2)}<br>`;
+      result += `政治实力变化: ${(params.political * 0.2 + params.military * 0.15 - params.happiness * 0.1).toFixed(2)}<br>`;
+      result += `军事实力变化: ${(params.military * 0.3 + params.production * 0.1).toFixed(2)}<br>`;
+      result += `幸福度变化: ${(params.happiness * 0.3 + params.environment * 0.2 - params.military * 0.05).toFixed(2)}<br>`;
+
+      oceanResult.innerHTML = result;
+    });
+
+    // 计算函数：游牧文明
+    calculateNomadicBtn.addEventListener('click', function() {
+      const params = {
+        production: parseFloat(document.getElementById('nomadicProduction').value),
+        political: parseFloat(document.getElementById('nomadicPolitical').value),
+        military: parseFloat(document.getElementById('nomadicMilitary').value),
+        happiness: parseFloat(document.getElementById('nomadicHappiness').value),
+        environment: parseFloat(document.getElementById('nomadicEnvironment').value),
+      };
+
+      let result = `<strong>${document.getElementById('nomadicName').value || '游牧文明'} 计算结果：</strong><br>`;
+      result += `生产力变化: ${(params.production * 0.2 + params.environment * 0.1 - params.political * 0.05).toFixed(2)}<br>`;
+      result += `政治实力变化: ${(params.political * 0.2 + params.military * 0.25 - params.happiness * 0.05).toFixed(2)}<br>`;
+      result += `军事实力变化: ${(params.military * 0.35 + params.production * 0.1).toFixed(2)}<br>`;
+      result += `幸福度变化: ${(params.happiness * 0.3 + params.environment * 0.1 - params.military * 0.05).toFixed(2)}<br>`;
+
+      nomadicResult.innerHTML = result;
+    });
+
+    // 初始显示农耕文明面板
+    showPanel(farmPanel);
+  </script>
+</body>
+</html>
